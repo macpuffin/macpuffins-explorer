@@ -328,11 +328,11 @@ router.get('/ext/stats', function(req, res) {
     var address_count_testnet = 0
     var token_count_testnet = 0
     // grab data from testnet
-    request({uri: "https://testnet.explorer.nebl.io/ext/stats", json: true, timeout: 2000, headers: {'User-Agent': 'neblio-block-explorer'}}, function (error, response, body) {
+    request({uri: "https://testnet.explorer.macpuffins.com/ext/stats", json: true, timeout: 2000, headers: {'User-Agent': 'macpuffins-block-explorer'}}, function (error, response, body) {
       address_count_testnet = body.data[0].active_address_count
       token_count_testnet = body.data[0].issued_token_count
       // get github download count
-      request({uri: "https://api.github.com/repos/NeblioTeam/neblio/releases", json: true, timeout: 2000, headers: {'User-Agent': 'neblio-block-explorer'}}, function (error, response, body) {
+      request({uri: "https://api.github.com/repos/macpuffin/macpuffins/releases", json: true, timeout: 2000, headers: {'User-Agent': 'macpuffins-block-explorer'}}, function (error, response, body) {
   	    for (var x = 0; x < body.length; x++){
           if (body[x].assets && body[x].assets.length){
   	        for (var a = 0; a < body[x].assets.length; a++){
@@ -343,7 +343,7 @@ router.get('/ext/stats', function(req, res) {
           }
         }
         // get current active node count
-        request({uri: "http://localhost:3003/24h_active_node_count", json: true, timeout: 2000, headers: {'User-Agent': 'neblio-block-explorer'}}, function (error, response, node_count) {
+        request({uri: "http://localhost:3003/24h_active_node_count", json: true, timeout: 2000, headers: {'User-Agent': 'macpuffins-block-explorer'}}, function (error, response, node_count) {
           db.count_addresses(function(address_count) {
   	        db.count_tokens(function(token_count) {
               // add testnet and mainnet to get total counts
